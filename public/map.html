@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Карта Кишинева</title>
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
+    <style>
+        #map {
+            width: 100%; /* Полная ширина */
+            height: 500px; /* Высота карты */
+        }
+    </style>
+</head>
+<body>
+<div id="map"></div>
+
+<script type="text/javascript">
+    ymaps.ready(init);
+    function init(){
+        var myMap = new ymaps.Map("map", {
+            center: [46.724, 28.55], // Координаты центра карты
+            zoom: 8
+        });
+
+        var placemark1 = new ymaps.Placemark([47.064641735174405, 28.835605525521135], {
+            balloonContent: 'Strada Doina 150, Chișinău'
+        });
+
+        var placemark2 = new ymaps.Placemark([46.27498752322266, 28.202765096641794], {
+            balloonContent: 'str. Ștefan Vodă 48, Cantemir'
+        });
+
+        myMap.geoObjects.add(placemark1);
+        myMap.geoObjects.add(placemark2);
+
+    }
+</script>
+</body>
+</html>

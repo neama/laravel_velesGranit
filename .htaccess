@@ -1,0 +1,14 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine on
+
+    # Перенаправление с корня на public
+    RewriteRule ^$ public/ [L]
+
+    # Перенаправление всех запросов в public
+    RewriteCond %{REQUEST_URI} !^/public/
+    RewriteRule ^(.*)$ public/$1 [L]
+
+    # Правило для доступа к файлам в storage
+    RewriteCond %{REQUEST_URI} ^/storage/
+    RewriteRule ^storage/(.*)$ storage/app/public/$1 [L]
+</IfModule>
