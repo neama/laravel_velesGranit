@@ -99,6 +99,11 @@
         font-size: 0.9rem;
 
     }
+    @media (max-width: 1050px) {
+        .social-media-container .social-media a.nav-link_header:not(.font_1rem) {
+            display: none;
+        }
+    }
 
     @media (max-width: 768px) {
         .header-container {

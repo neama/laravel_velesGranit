@@ -46,6 +46,7 @@ Route::middleware([SetLocale::class])->group(function () {
     Route::get('{locale}/basket/checkout', [BasketController::class, 'checkout'])->name('basket.checkout');
 
     Route::get('{locale}/gallery/preview', [GalleryController::class, 'getPreviewGallery'])->name('gallery.preview');
+    Route::get('{locale}/gallery/preview/{id}', [GalleryController::class, 'getPreviewGalleryId'])->name('gallery.preview.id');
 
 
     Route::post('{locale}/basket/add/{id}', [BasketController::class, 'add'])
