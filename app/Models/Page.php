@@ -18,6 +18,10 @@ class Page extends Model {
         'lang'
     ];
 
+
+    public static function getPageForHost($host){
+        return self::where('host',$host)->get();
+    }
     public static function roots() {
 
         return self::where('parent_id', 0)

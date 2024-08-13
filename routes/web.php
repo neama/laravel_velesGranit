@@ -6,6 +6,7 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\LanguageController;
 use App\Http\Controllers\BasketController;
 use App\Http\Controllers\GalleryController;
+use App\Http\Controllers\SitemapController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdditionalController;
 use App\Http\Controllers\Admin\CategoryController;
@@ -25,6 +26,8 @@ Route::middleware([SetLocale::class])->group(function () {
  * Страницы «Доставка», «Контакты» и прочие
  */
     Route::get('/page/{slug:slug}', [PagesController::class,'index'])->name('page.show');
+
+    Route::get('/sitemap.xml', [SitemapController::class,'index']);
 
     Route::group(['middleware' => 'setLocale'], function() {
         Route::get('{locale}/catalog/category/{slug}', [CatalogController::class, 'category'])->name('catalog.category');

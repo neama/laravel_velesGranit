@@ -93,4 +93,10 @@ class Category extends Model
         return self::where('parent_id', 0)->with('descendants')->get();
     }
 
+    public static function getCategoryForHost($host)
+    {
+        return self::where('host',$host)
+            ->get();
+    }
+
 }

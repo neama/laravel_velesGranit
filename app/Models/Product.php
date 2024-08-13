@@ -24,7 +24,9 @@ class Product extends Model
 
     use HasFactory;
 
-
+    public static function getProductForHost($host){
+        return self::where(['host'=>$host])->get();
+    }
     public function getProductsCategory($catId){
        return self::where(['category_id'=>$catId]);
      }
