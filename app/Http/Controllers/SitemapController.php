@@ -64,7 +64,7 @@ class SitemapController extends Controller
         }
         $productSite = Product::getProductForHost($host);
         foreach ($productSite as $product){
-            $path = $product->lang.'/'.'page/product/'.$product->slug;
+            $path = $product->lang.'/'.'catalog/product/'.$product->slug;
             $siteMap.= '<url><loc>' . url($path) . '</loc><lastmod>' . now()->toAtomString() . '</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>';
 
         }
