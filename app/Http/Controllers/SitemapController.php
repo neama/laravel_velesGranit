@@ -55,6 +55,8 @@ class SitemapController extends Controller
         if (!File::exists($path)) {
             File::makeDirectory(dirname($path), 0755, true);
             File::put($path, $sitemapContent);
+        }else{
+            File::put($path, $sitemapContent);
         }
     }
 
