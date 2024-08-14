@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Page;
 use App\Models\Product;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Response;
@@ -21,6 +22,15 @@ class SitemapController extends Controller
 
         if (!File::exists($path)) {
             $this->createSitemapXml($host);
+        }else{
+            $lastModified = File::lastModified($path);
+
+            // Создаем объект Carbon для текущего времени и времени последнего изменения
+            $lastModifiedTime = Carbon::createFromTimestamp($lastModified);
+            $currentTime = Carbon::now();
+            if ($lastModifiedTime->diffInMinutes($currentTime) > 2) {
+                $this->createSitemapXml($host);
+            }
         }
         $content = File::get($path);
         return response($content, 200)->header('Content-Type', 'application/xml');
