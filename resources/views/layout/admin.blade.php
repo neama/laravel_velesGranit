@@ -50,6 +50,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('admin.additional.index') }}">ДопПараметры</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('admin.additional.index') }}">ЗаполнитьГалерею</a>
+                </li>
             </ul>
 
             <!-- Этот блок расположен справа -->

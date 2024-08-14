@@ -189,4 +189,25 @@ class AdditionalController extends Controller
 
     }
 
+    public function showGallery(){
+        $allFiles = glob('./images/*.jpg');
+        echo '<pre>';
+        // print_r($allFiles);
+        foreach ($allFiles as $file) {
+            echo $file. "<img src='".str_replace('./','/',$file)."' width='100px;'height='100px;'><br>";
+        }
+        die;
+
+    }
+
+    public function populateGallery(){
+        $allFiles = glob('./images/*.jpg');
+        echo '<pre>';
+        // print_r($allFiles);
+        foreach ($allFiles as $file) {
+            echo $file. "<img src='".str_replace('./','/',$file)."' width='100px;'height='100px;'><br>";
+        }
+        die;
+
+    }
 }
