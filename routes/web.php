@@ -105,6 +105,9 @@ Route::group([
     Route::get('additional/removeCategoryForHost', [AdditionalController::class, 'removeCategoryForHost'])->name('additional.removeCategoryForHost');
     Route::get('additional/populateKeyWordsCategoryProducts', [AdditionalController::class, 'populateKeyWordsCategoryProducts'])->name('additional.populateKeyWordsCategoryProducts');
     Route::get('additional/showGallery', [AdditionalController::class, 'showGallery'])->name('additional.showGallery');
+    Route::get('additional/populateGallery', [AdditionalController::class, 'populateGallery'])->name('additional.populateGallery');
+
+
     // CRUD-операции над категориями каталога
     Route::resource('category', CategoryController::class);
     Route::resource('brand', BrandController::class);

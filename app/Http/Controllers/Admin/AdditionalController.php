@@ -189,24 +189,38 @@ class AdditionalController extends Controller
 
     }
 
-    public function showGallery(){
-        $allFiles = glob('./images/*.jpg');
-        echo '<pre>';
-        // print_r($allFiles);
-        foreach ($allFiles as $file) {
-            echo $file. "<img src='".str_replace('./','/',$file)."' width='100px;'height='100px;'><br>";
-        }
-        die;
-
-    }
-
     public function populateGallery(){
-        $allFiles = glob('./images/*.jpg');
-        echo '<pre>';
-        // print_r($allFiles);
-        foreach ($allFiles as $file) {
-            echo $file. "<img src='".str_replace('./','/',$file)."' width='100px;'height='100px;'><br>";
+        $directory = './images';
+        $allFiles = array_diff(scandir($directory), ['.', '..']); // Получение всех файлов
+        $thumbFiles = preg_grep('/-thumb\.jpg$/', $allFiles); // Фильтрация файлов
+
+        foreach ($images as $image) {
+            // Создаем уникальное имя для записи
+            $uniqueName = 'grave_' . rand(1000, 9999);
+            $slug = Str::slug($uniqueName);
+
+            // Перемещаем изображение в хранилище
+            $publicPath = public_path('images/' . $image);
+            $storagePath = 'gallery/' . $image;
+            Storage::disk('public')->move('images/' . $image, $storagePath);
+
+            $fullImage = str_replace('-thumb','',$image);
+            $publicPath = public_path('images/' . $fullImage);
+            $storagePathAdd = 'gallery/' . $fullImage;
+            Storage::disk('public')->move('images/' . $fullImage, $storagePathAdd);
+die;
+            // Создаем новую запись в базе данных
+            Gallery::create([
+                'name' => $uniqueName,
+                'slug' => $slug,
+                'description' => '',
+                'base_image' => $storagePath,
+                'additional_image' => $storagePathAdd
+            ])->save();
         }
+
+        echo '<pre>';
+        print_r($thumbFiles);
         die;
 
     }

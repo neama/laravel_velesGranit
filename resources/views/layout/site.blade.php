@@ -8,8 +8,6 @@
     <meta name="description" content="@yield('description', 'Achiziționarea unui monument funerar din granit este ușoară de la producătorul vgritual.md, la noi puteți comanda toate tipurile de servicii funerare!')">
     <meta name="keywords" content="@yield('keywords', 'monumente, sicrie, coroane de flori, garduri, cruci, servicii funerare, înnobilare de morminte,')">
     <link rel="canonical" href="{{ url()->current() }}" />
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <script src="{{ asset('js/app.js') }}"></script>
     <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
@@ -19,8 +17,6 @@
     @php
     //<script src="//code.jivo.ru/widget/idtlcDD46J" async></script>
     @endphp
-    <script src="{{ asset('js/site.js') }}"></script>
-    <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
     <link rel="stylesheet" href="{{ asset('css/owl.carousel.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/owl.theme.default.min.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Germania+One&display=swap" rel="stylesheet">
@@ -50,7 +46,7 @@
             background-color: #c6c7ca;
         }
         .breadCrumbAndLang-container{
-         /*   background-color: #000; /* Новый цвет фона */
+            /*   background-color: #000; /* Новый цвет фона */
             border-radius: 10px;
             border-bottom: 3px solid;
         }
@@ -66,7 +62,7 @@
             border-top: 1px solid;
         }
         .container-fluid {
-           /* background-image: url('/img/back.webp'); */
+            /* background-image: url('/img/back.webp'); */
             background-repeat: no-repeat;
             background-size: cover;
             background-position: center;
@@ -115,9 +111,9 @@
                 font-size: 0.6rem;
             }
         }
-         .footer-container.container-fluid{
-             background-color: black;
-         }
+        .footer-container.container-fluid{
+            background-color: black;
+        }
         .header-container {
             display: flex;
             align-items: center;
@@ -197,6 +193,49 @@
                 justify-content: center;
             }
         }
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        .phoneIconCall {
+            color: red; /* Устанавливаем цвет иконки */
+            font-size: 1.5rem; /* Устанавливаем размер иконки */
+            animation: bounce 2s infinite; /* Применяем анимацию bounce */
+        }
+
+        #openModalPhoneCall {
+            position: fixed; /* Фиксированное позиционирование */
+            bottom: 20px; /* Расположить кнопку на расстоянии 20px от нижнего края */
+            right: 20px; /* Расположить кнопку на расстоянии 20px от правого края */
+            border-radius: 10px; /* Закругленные углы кнопки */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2); /* Тень для кнопки */
+            padding: 10px 15px; /* Отступы внутри кнопки */
+            display: flex; /* Используем flexbox для выравнивания содержимого */
+            align-items: center; /* Вертикальное выравнивание содержимого */
+            gap: 10px; /* Расстояние между иконкой и текстом */
+            z-index: 1050; /* Убедитесь, что кнопка поверх всех элементов */
+        }
+
+        #openModalPhoneCall:hover {
+            background-color: #0056b3; /* Цвет фона при наведении */
+            color: #fff; /* Цвет текста при наведении */
+        }
+
+        .modal {
+            z-index: 1045; /* Убедитесь, что модальное окно ниже кнопки, но поверх всех других элементов */
+        }
+
+        .modal-dialog {
+            z-index: 1050; /* Убедитесь, что диалоговое окно модального окна поверх остальных элементов */
+        }
     </style>
 </head>
 <body>
@@ -253,4 +292,8 @@
 </script>*/?>
 @stack('scripts')
 </body>
+<script src="{{ asset('js/site.js') }}"></script>
+<script src="{{ asset('js/owl.carousel.min.js') }}"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
 </html>
