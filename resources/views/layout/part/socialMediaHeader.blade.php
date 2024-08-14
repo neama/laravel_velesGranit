@@ -19,9 +19,3 @@
         </a>
     </div>
 </div>
-
-<style>
-    a.nav-link:hover {
-        color: lightcoral; /* Цвет при наведении */
-    }
-</style>

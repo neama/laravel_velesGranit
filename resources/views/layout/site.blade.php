@@ -25,6 +25,20 @@
     <link rel="stylesheet" href="{{ asset('css/owl.theme.default.min.css') }}">
     <link href="https://fonts.googleapis.com/css2?family=Germania+One&display=swap" rel="stylesheet">
     <style>
+        a.nav-link:hover {
+            color: lightcoral; /* Цвет при наведении */
+        }
+        .nav-tabs .nav-link {
+            font-size: 1.25rem; /* Увеличение шрифта вкладок */
+            color: black; /* Черный цвет текста вкладок */
+        }
+        .nav-tabs .nav-link.active {
+            color: gray; /* Черный цвет текста активной вкладки */
+        }
+        .tab-content p {
+            font-size: 1.25rem; /* Увеличение шрифта текста внутри вкладок */
+            color: black; /* Черный цвет текста внутри вкладок */
+        }
         .padding-content{
             padding-top: 2%;
             padding-bottom: 2%;
@@ -104,6 +118,85 @@
          .footer-container.container-fluid{
              background-color: black;
          }
+        .header-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .search-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .social-media-container {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .social-media {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            font-size: x-small;
+        }
+
+        .basket-header-container {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        a.nav-link_header, a.basket-link {
+            color: white;
+            text-decoration: none;
+        }
+
+        a.nav-link_header:hover, a.basket-link:hover {
+            color: lightcoral;
+        }
+        .font_1rem{
+            font-size: 0.9rem;
+
+        }
+        @media (max-width: 1050px) {
+            .social-media-container .social-media a.nav-link_header:not(.font_1rem) {
+                display: none;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .logo-container {
+                margin-bottom: 10px;
+            }
+
+            .search-container {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            .social-media-container {
+                width: 100%;
+                justify-content: center;
+                margin-bottom: 10px;
+            }
+
+            .basket-header-container {
+                width: 100%;
+                justify-content: center;
+            }
+        }
     </style>
 </head>
 <body>
