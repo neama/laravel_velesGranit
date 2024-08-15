@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\ProductOptionController;
+use App\Http\Controllers\Admin\GalleriesController;
 use App\Http\Controllers\Admin\PageController;
 use App\Http\Controllers\PagesController;
 use App\Http\Middleware\SetLocale;
@@ -46,7 +47,7 @@ Route::middleware([SetLocale::class])->group(function () {
     Route::get('{locale}/basket/checkout', [BasketController::class, 'checkout'])->name('basket.checkout');
 
     Route::get('{locale}/gallery/preview', [GalleryController::class, 'getPreviewGallery'])->name('gallery.preview');
-    Route::get('{locale}/gallery/preview/{id}', [GalleryController::class, 'getPreviewGalleryId'])->name('gallery.preview.id');
+    Route::get('{locale}/gallery/show/{slug}', [GalleryController::class, 'getPreviewGalleryId'])->name('gallery.show.id');
 
 
     Route::post('{locale}/basket/add/{id}', [BasketController::class, 'add'])
@@ -106,12 +107,23 @@ Route::group([
     Route::get('additional/populateKeyWordsCategoryProducts', [AdditionalController::class, 'populateKeyWordsCategoryProducts'])->name('additional.populateKeyWordsCategoryProducts');
     Route::get('additional/showGallery', [AdditionalController::class, 'showGallery'])->name('additional.showGallery');
     Route::get('additional/populateGallery', [AdditionalController::class, 'populateGallery'])->name('additional.populateGallery');
-
+    Route::get('galleries/index', [GalleriesController::class,'index'])->name('galleries.index');
+    Route::get('galleries/show/{slug}', [GalleriesController::class,'show'])->name('galleries.show');
+    Route::get('galleries/edit/{slug}', [GalleriesController::class,'edit'])->name('galleries.edit');
+    Route::get('galleries/destroy/{slug}', [GalleriesController::class,'show'])->name('galleries.destroy');
+    Route::get('galleries/create/', [GalleriesController::class,'create'])->name('galleries.create');
+    Route::post('galleries/store', [GalleriesController::class, 'store'])
+        ->name('galleries.store');
+    Route::put('galleries/update/{slug}', [GalleriesController::class, 'update'])
+        ->name('galleries.update');
+    Route::delete('galleries/destroy/{slug}', [GalleriesController::class, 'destroy'])
+        ->name('galleries.destroy');
 
     // CRUD-операции над категориями каталога
     Route::resource('category', CategoryController::class);
     Route::resource('brand', BrandController::class);
     Route::resource('product', ProductController::class);
+
     Route::resource('product-option', ProductOptionController::class);
     Route::get('product/category/{category}', [ProductController::class,'category'])
         ->name('product.category');

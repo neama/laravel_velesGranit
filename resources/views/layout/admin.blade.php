@@ -48,11 +48,13 @@
                     <a class="nav-link" href="{{ route('admin.pages.index') }}">ДопСтраницы</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.additional.index') }}">ДопПараметры</a>
+                    <a class="nav-link" href="{{ route('admin.galleries.index') }}">Галерея</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.additional.populateGallery') }}">ЗаполнитьГалерею</a>
+                    <a class="nav-link" href="{{ route('admin.additional.index') }}">ДопПараметры</a>
                 </li>
+
+                galleries
             </ul>
 
             <!-- Этот блок расположен справа -->

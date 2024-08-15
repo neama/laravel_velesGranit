@@ -5,9 +5,10 @@
     <form method="post" enctype="multipart/form-data"
           action="{{ route('admin.product.update', ['product' => $product->id]) }}">
         @method('PUT')
-        @include('admin.product.part.form')
+        @include('admin.gallery.part.form')
     </form>
-    <a href="{{ route('admin.product-option.index',["category_id"=>'','product_id'=>$product->id]) }}" class="btn btn-success mb-4">
+    <a href="{{ route('admin.product-option.index',["category_id"=>'','product_id'=>$product->id]) }}"
+       class="btn btn-success mb-4">
         Перейти к редактированию доп опций
     </a>
 @endsection

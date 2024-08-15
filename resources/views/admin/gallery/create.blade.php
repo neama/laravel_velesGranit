@@ -1,8 +1,8 @@
 @extends('layout.admin', ['title' => 'Создание товара'])
 
 @section('content')
-    <h1>Создание нового товара</h1>
-    <form method="post" action="{{ route('admin.product.store') }}" enctype="multipart/form-data">
+    <h1>Загрузка новой картинки</h1>
+    <form method="post" action="{{ route('admin.galleries.store') }}" enctype="multipart/form-data">
         @include('admin.gallery.part.form')
     </form>
 @endsection

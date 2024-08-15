@@ -21,10 +21,12 @@
         <div class="col-md-12">
             <div class="row d-flex justify-content-center">
                 @foreach ($files as $file)
+
+                    @php($url = url('storage/gallery/' . $file->base_image))
                     <div class="col-md-3 mb-3">
                         <div class="card">
-                            <a href="{{ asset('images/' . str_replace('-thumb','',$file)) }}" class="btn btn-info" target="_blank" title="{{__('open in new window')}}">
-                                <img src="{{ asset('images/' . $file) }}" class="card-img-top" alt="{{ $file }}">
+                            <a href="{{ route('gallery.show.id', ['slug' => $file->slug,'locale' => app()->getLocale()]) }}" class="btn btn-info"  title="{{__('open')}}">
+                                <img src="{{$url}}" class="card-img-top" alt="{{ $file->description }}">
                             </a>
                         </div>
                     </div>

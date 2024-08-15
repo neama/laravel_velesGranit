@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+
 class Gallery extends Model
 {
     use HasFactory;
@@ -44,5 +45,34 @@ class Gallery extends Model
         }, $selectedFiles);
 
         return $filesWithPaths;
+    }
+
+    public static function randImageFromDb(){
+        return self::inRandomOrder()->take(4)->get();
+
+    }
+
+    public static function getItems(string $slug){
+        $current = self::where('slug', $slug)->first();
+
+        if (!$current) {
+            return null; // Если запись не найдена
+        }
+
+        // Получаем предыдущую запись (меньший ID)
+        $previous = self::where('id', '<', $current->id)
+            ->orderBy('id', 'desc')
+            ->first();
+
+        // Получаем следующую запись (больший ID)
+        $next = self::where('id', '>', $current->id)
+            ->orderBy('id', 'asc')
+            ->first();
+
+        return [
+            'previous' => $previous,
+            'current' => $current,
+            'next' => $next,
+        ];
     }
 }

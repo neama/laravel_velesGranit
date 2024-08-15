@@ -4,9 +4,13 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Gallery;
 use App\Models\Page;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class AdditionalController extends Controller
 {
@@ -194,34 +198,34 @@ class AdditionalController extends Controller
         $allFiles = array_diff(scandir($directory), ['.', '..']); // Получение всех файлов
         $thumbFiles = preg_grep('/-thumb\.jpg$/', $allFiles); // Фильтрация файлов
 
-        foreach ($images as $image) {
-            // Создаем уникальное имя для записи
-            $uniqueName = 'grave_' . rand(1000, 9999);
+        $directory = storage_path('app/public/gallery/');
+
+        if (!File::exists($directory)) {
+            File::makeDirectory($directory, 0755, true);
+        }
+        foreach ($thumbFiles as $image) {
+            $uniqueName = 'grave_' . uniqid();
             $slug = Str::slug($uniqueName);
 
             // Перемещаем изображение в хранилище
             $publicPath = public_path('images/' . $image);
-            $storagePath = 'gallery/' . $image;
-            Storage::disk('public')->move('images/' . $image, $storagePath);
-
+            $storagePath = $directory . $image;
+            if (file_exists($publicPath)) {
+                rename($publicPath, $storagePath);
+            }
             $fullImage = str_replace('-thumb','',$image);
             $publicPath = public_path('images/' . $fullImage);
-            $storagePathAdd = 'gallery/' . $fullImage;
-            Storage::disk('public')->move('images/' . $fullImage, $storagePathAdd);
-die;
+            $storagePathAdd = $directory . $fullImage;
+            rename($publicPath, $storagePathAdd);
+
             // Создаем новую запись в базе данных
             Gallery::create([
                 'name' => $uniqueName,
                 'slug' => $slug,
                 'description' => '',
-                'base_image' => $storagePath,
-                'additional_image' => $storagePathAdd
+                'base_image' => $image,
+                'additional_image' => $fullImage
             ])->save();
         }
-
-        echo '<pre>';
-        print_r($thumbFiles);
-        die;
-
     }
 }

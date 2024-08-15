@@ -68,8 +68,11 @@ class ComposerServiceProvider extends ServiceProvider {
         View::composer('layout.part.catalogDescriptionMain', function($view) {
             $view->with(['monuments' => Category::roots()]);
         });
-        View::composer('layout.part.galleryMain', function($view) {
+        /*View::composer('layout.part.galleryMain', function($view) {
             $view->with(['files' => Gallery::randImage()]);
+        });*/
+        View::composer('layout.part.galleryMain', function($view) {
+            $view->with(['files' => Gallery::randImageFromDb()]);
         });
     }
 
@@ -92,7 +95,7 @@ class ComposerServiceProvider extends ServiceProvider {
 
     private function getAllBreadCrumbs(): array
     {
-
+        Log::info('test');
         $breadCrumbs = [];
         $getAllPoints = true;
         $startPoint = '';
@@ -101,6 +104,7 @@ class ComposerServiceProvider extends ServiceProvider {
         if(isset($params['locale'])){
             unset($params['locale']);
         }
+
 
         if($routeName == 'catalog.index'){
             $breadCrumbs[] = __('catalog');
@@ -128,9 +132,24 @@ class ComposerServiceProvider extends ServiceProvider {
         if(empty($params)) {
             return $breadCrumbs;
         }
+        Log::info('test2222'.print_r($breadCrumbs,true).'   '.(int)$getAllPoints.'  '.$routeName);
         while($getAllPoints){
 
             $slug = $params['slug'];
+
+
+            if($routeName == 'gallery.show.id'){
+                $startPoint = __('gallery');
+                $getGallery   = Gallery::where('slug', $slug)->get();
+                if(count($getGallery)==0){
+                    return $breadCrumbs;
+                }else{
+                    $breadCrumbs[] = $getGallery[0]->name;
+                    $getAllPoints = false;
+                    $parentId = 0;
+                }
+
+            }
             if($routeName == 'page.show'){
                 $startPoint = __('Page');
 
@@ -186,6 +205,7 @@ class ComposerServiceProvider extends ServiceProvider {
             }
         }
         $breadCrumbs[] = __($startPoint);
+        Log::info('test11111111111111'.print_r($breadCrumbs,true));
        return array_reverse($breadCrumbs);
     }
 }

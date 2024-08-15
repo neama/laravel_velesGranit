@@ -7,12 +7,13 @@
 
     <div class="col-md-12">
         <div class="row d-flex justify-content-center">
+
             @foreach ($files as $file)
                 <div class="col-md-3 mb-3">
                     <div class="card">
-
+                        @php($url = url('storage/gallery/' . $file->base_image))
                         <a href="{{ route('gallery.preview', ['locale' => app()->getLocale()]) }}" class="btn btn-info" title="{{__('gallery')}}">
-                            <img src="{{ asset($file) }}" class="card-img-top" alt="{{ $file }}">
+                            <img src="{{ $url }}" class="card-img-top" alt="{{ $file->description }}">
                         </a>
                     </div>
                 </div>

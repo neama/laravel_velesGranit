@@ -10,4 +10,7 @@
     <a href="{{ route('admin.additional.category') }}">копия категорий</a>
     <br>
     <a href="{{ route('admin.additional.populateKeyWordsCategoryProducts') }}">заполнение ключевых слов SEO</a>
+    <br>
+    <a  href="{{ route('admin.additional.populateGallery') }}">ЗаполнитьГалерею</a>
+
 @endsection

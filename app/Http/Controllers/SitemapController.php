@@ -48,7 +48,10 @@ class SitemapController extends Controller
         $sitemapContent .= '<url><loc>' . url('/ro') . '</loc><lastmod>' . now()->toAtomString() . '</lastmod><changefreq>monthly</changefreq><priority>1.0</priority></url>';
         $sitemapContent .= '<url><loc>' . url('/ru/catalog/index') . '</loc><lastmod>' . now()->toAtomString() . '</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
         $sitemapContent .= '<url><loc>' . url('/ro/catalog/index') . '</loc><lastmod>' . now()->toAtomString() . '</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
+        $sitemapContent .= '<url><loc>' . url('ru/gallery/preview') . '</loc><lastmod>' . now()->toAtomString() . '</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
+        $sitemapContent .= '<url><loc>' . url('ro/gallery/preview') . '</loc><lastmod>' . now()->toAtomString() . '</lastmod><changefreq>weekly</changefreq><priority>0.9</priority></url>';
 
+        ///ru/gallery/preview
         $sitemapContent = $this->addBaseCategory($sitemapContent, $host);
         $sitemapContent .= '</urlset>';
 

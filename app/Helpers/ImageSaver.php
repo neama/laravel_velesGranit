@@ -43,6 +43,54 @@ class ImageSaver {
         return $name;
     }
 
+    public function uploadGallery($request, $item) {
+
+        $source = $request->file('image');
+
+        if ($source) { // если было загружено изображение
+            // перед загрузкой нового изображения удаляем старое
+
+                $this->removeGal($item);
+            }
+
+            $ext = $source->extension();
+            // сохраняем загруженное изображение без всяких изменений
+            $path = $source->store('gallery', 'public');
+            $path = Storage::disk('public')->path($path); // абсолютный путь
+            $name = basename($path); // имя файла
+            $addFile = explode('.',$name);
+            $name_t = $addFile[0].'-thumb.'.$addFile[1];
+ // создаем уменьшенное изображение 600x300px, качество 100%
+            //  $dst = 'catalog/'.$dir.'/image/';*/
+              $dst = 'gallery/'.$name_t;
+              $this->resize1($path, $dst, 300, 400, $ext);
+              // создаем уменьшенное изображение 300x150px, качество 100%
+              /*$dst = 'catalog/'.$dir.'/thumb/';
+              $this->resize($path, $dst, 300, 150, $ext);*/
+
+        return [$name,$name_t];
+    }
+
+
+    private function resize1($src, $dst, $width, $height, $ext) {
+        // создаем уменьшенное изображение width x height, качество 100%
+        /*$image = Image::read($src)
+            ->heighten($height)
+            ->resizeCanvas($width, $height, 'center', false, 'eeeeee')
+            ->encode($ext, 100);
+        // сохраняем это изображение под тем же именем, что исходное
+*/
+        $image = Image::read($src)
+            ->resize($width, $height, function ($constraint) {
+                $constraint->aspectRatio();
+                $constraint->upsize();
+            })->toJpeg(100);
+
+        // $image = Image::read($src)->resize($width, $height);
+        $name = basename($src);
+        Storage::disk('public')->put($dst, $image);
+        unset($img);
+    }
     /**
      * Создает уменьшенную копию изображения
      *
@@ -84,5 +132,15 @@ class ImageSaver {
             Storage::disk('public')->delete('catalog/'.$dir.'/image/' . $old);
             Storage::disk('public')->delete('catalog/'.$dir.'/thumb/' . $old);
         }
+    }
+
+
+    public function removeGal($item) {
+
+        $old_basic = $item?->base_image;
+        $old_additional = $item?->additional_image;
+
+        Storage::disk('public')->delete('gallery/'.$old_basic);
+        Storage::disk('public')->delete('gallery/'.$old_additional);
     }
 }
