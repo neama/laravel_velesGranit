@@ -1,6 +1,8 @@
 User-agent: *
 Disallow: /*?
 Disallow: /user/
+Disallow: /ru/basket/index
+Disallow: /ro/basket/index
 
 # Разрешить полное сканирование остального сайта
 Allow: /

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Gallery;
 use App\Models\Page;
 use App\Models\Product;
 use Carbon\Carbon;
@@ -80,6 +81,14 @@ class SitemapController extends Controller
         $productSite = Product::getProductForHost($host);
         foreach ($productSite as $product){
             $path = $product->lang.'/'.'catalog/product/'.$product->slug;
+            $siteMap.= '<url><loc>' . url($path) . '</loc><lastmod>' . now()->toAtomString() . '</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>';
+
+        }
+        $gallerySite = Gallery::getGallery();
+        foreach ($gallerySite as $image){
+            $path = '/ru/'.'catalog/product/'.$image->slug;
+            $siteMap.= '<url><loc>' . url($path) . '</loc><lastmod>' . now()->toAtomString() . '</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>';
+            $path = '/ro/'.'catalog/product/'.$image->slug;
             $siteMap.= '<url><loc>' . url($path) . '</loc><lastmod>' . now()->toAtomString() . '</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>';
 
         }
