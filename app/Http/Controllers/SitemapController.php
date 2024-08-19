@@ -86,9 +86,9 @@ class SitemapController extends Controller
         }
         $gallerySite = Gallery::all();
         foreach ($gallerySite as $image){
-            $path = '/ru/'.'catalog/product/'.$image->slug;
+            $path = '/ru/'.'gallery/show/'.$image->slug;
             $siteMap.= '<url><loc>' . url($path) . '</loc><lastmod>' . now()->toAtomString() . '</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>';
-            $path = '/ro/'.'catalog/product/'.$image->slug;
+            $path = '/ro/'.'gallery/show/'.$image->slug;
             $siteMap.= '<url><loc>' . url($path) . '</loc><lastmod>' . now()->toAtomString() . '</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>';
 
         }
