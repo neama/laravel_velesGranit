@@ -75,4 +75,8 @@ class Gallery extends Model
             'next' => $next,
         ];
     }
+    public function getGallery()
+    {
+
+    }
 }
