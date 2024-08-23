@@ -70,7 +70,10 @@ class SitemapController extends Controller
         foreach ($categorySite as $cat){
             $path = $cat->lang.'/'.'catalog/category/'.$cat->slug;
             $siteMap.= '<url><loc>' . url($path) . '</loc><lastmod>' . now()->toAtomString() . '</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>';
-
+            $path = $cat->lang.'/'.'catalog/category/'.$cat->slug.'?filter=max';
+            $siteMap.= '<url><loc>' . url($path) . '</loc><lastmod>' . now()->toAtomString() . '</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>';
+            $path = $cat->lang.'/'.'catalog/category/'.$cat->slug.'?filter=low';
+            $siteMap.= '<url><loc>' . url($path) . '</loc><lastmod>' . now()->toAtomString() . '</lastmod><changefreq>weekly</changefreq><priority>0.7</priority></url>';
         }
         $pagesSite = Page::getPageForHost($host);
         foreach ($pagesSite as $page){
@@ -85,6 +88,7 @@ class SitemapController extends Controller
 
         }
         $gallerySite = Gallery::all();
+        $pageQuantity = floor(count($gallerySite) / env('GALLERY_PER_PAGE'));
         foreach ($gallerySite as $image){
             $path = '/ru/'.'gallery/show/'.$image->slug;
             $siteMap.= '<url><loc>' . url($path) . '</loc><lastmod>' . now()->toAtomString() . '</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>';

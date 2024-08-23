@@ -20,7 +20,7 @@ class GalleryController extends Controller
         $paginator = new LengthAwarePaginator($files, count( $thumbFiles ), $perPage, $currentPage, [
             'path' => LengthAwarePaginator::resolveCurrentPath(),
         ]); */
-        $perPage = 8; // Количество записей на одной странице
+        $perPage = env('GALLERY_PER_PAGE'); // Количество записей на одной странице
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
 
 // Получение всех записей из таблицы `galleries`

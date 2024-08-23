@@ -1,6 +1,8 @@
 <IfModule mod_rewrite.c>
     RewriteEngine on
 
+    RewriteCond %{HTTPS} off
+    RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
     # Перенаправление с корня на public
     RewriteRule ^$ public/ [L]
 
